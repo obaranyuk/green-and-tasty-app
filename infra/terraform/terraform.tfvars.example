@@ -1,0 +1,5 @@
+# Example Terraform variables
+# Copy this file to terraform.tfvars and fill in your values.
+account_id   = "123456789012"
+alert_emails = ["you@example.com"]
+
