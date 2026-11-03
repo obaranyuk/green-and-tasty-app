@@ -1,0 +1,36 @@
+<main class="page">
+  <!-- Шапка з інвайтом (адреса, дата, час, кількість гостей) -->
+  <header class="order-header">
+    <h1>Group Pre-Order</h1>
+    
+    @if (invite()) {
+      <div class="invite-info">
+        <p class="address">{{ invite().LocationAddress }}</p>
+        <p class="schedule">
+          {{ invite().StartTime | date:'mediumDate' }} • 
+          {{ invite().StartTime | date:'shortTime' }} - {{ invite().EndTime | date:'shortTime' }}
+        </p>
+        <p class="guests-count">
+          {{ participants().length }} of {{ invite().MaxGuestCount }} guests
+        </p>
+      </div>
+    }
+  </header>
+
+  <!-- Список карток учасників -->
+  <ul class="participants">
+    @for (person of participants(); track person.id) {
+      <li><app-participant-card [participant]="person" /></li>
+    }
+  </ul>
+
+  <!-- Блок Grand Total та кнопка -->
+  <footer class="order-footer">
+    <div class="grand-total-section">
+      <span class="grand-total-label">Grand Total</span>
+      <span class="grand-total-value">{{ grandTotal() | currency }}</span>
+    </div>
+
+    <button type="button" class="submit-btn">Submit Pre-Order</button>
+  </footer>
+</main>
